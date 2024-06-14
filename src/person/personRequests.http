@@ -1,0 +1,5 @@
+### get All Person
+GET http://localhost:3000/person
+
+### get Person With Id
+GET http://localhost:3000/person/1
