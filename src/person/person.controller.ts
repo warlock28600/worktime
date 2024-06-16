@@ -1,6 +1,7 @@
-import { Body, Controller, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
 import {PersonService} from "./person.service";
 import { CreatePersonDto } from '../dto/personDtos/createPersonDto';
+import { PersonEntity } from '../entity/person.entity';
 
 
 @Controller('person')
@@ -29,7 +30,12 @@ export class PersonController {
     }
 
     @Put('/:id')
-    updatePerson(@Param('id') id:number,@Body() body : CreatePersonDto){
+    updatePerson(@Param('id') id:number,@Body() body : Partial<PersonEntity>){
         return  this.personService.onUpdatePerson(id,body)
+    }
+
+    @Delete('/:id')
+    onDeletePerson(@Param('id') id:number){
+        return this.personService.onDeletePerson(id)
     }
 }

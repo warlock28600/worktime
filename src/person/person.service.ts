@@ -24,11 +24,21 @@ export class PersonService {
     }
 
     async onUpdatePerson(id:number,attr :Partial<PersonEntity>){
-        const person = await this.repo.findBy({id:id})
+        const person = await this.repo.findOneBy({id:id})
         if(!person){
             throw new NotFoundException('person with given id was not found')
         }
+        console.log(attr);
         Object.assign(person,attr)
+        console.log(person);
         return  this.repo.save(person)
+    }
+
+    async onDeletePerson(id:number){
+        const person= await this.repo.findBy({id:id})
+        if(!person){
+            throw new NotFoundException('person with given id was not found')
+        }
+        return this.repo.remove(person)
     }
 }
