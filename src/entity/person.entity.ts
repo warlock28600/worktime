@@ -1,5 +1,6 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
+import { GenderEntity } from './gender.entity';
 
 @Entity()
 export class PersonEntity{
@@ -33,5 +34,9 @@ export class PersonEntity{
 
     @Column({default:false})
     Approved:boolean
+
+    @OneToOne(type => GenderEntity)
+    @JoinColumn()
+    gender:GenderEntity
 
 }
