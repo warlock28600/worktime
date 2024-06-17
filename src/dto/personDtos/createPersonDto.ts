@@ -1,4 +1,4 @@
-import { IsEmail, IsString, Max, Min } from 'class-validator';
+import { IsEmail, IsNumber, IsPositive, IsString, Max, Min } from 'class-validator';
 import { Column } from 'typeorm';
 
 
@@ -28,12 +28,14 @@ export  class CreatePersonDto {
   @IsString()
   mobile:string
 
-
-
   @IsString()
   idno:string
 
   @IsString()
   @Max(50)
   fatherName:string
+
+  @IsNumber()
+  @IsPositive()
+  genderId:number
 }
