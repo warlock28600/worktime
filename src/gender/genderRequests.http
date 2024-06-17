@@ -1,0 +1,26 @@
+### get all gender
+GET http://localhost:3000/gender
+
+
+### get gender with id
+GET http://localhost:3000/gender/1
+
+
+### create gender
+POST http://localhost:3000/gender
+Content-Type: application/json
+
+{
+  "title": "زن"
+}
+
+###update gender
+PUT http://localhost:3000/gender
+Content-Type: application/json
+
+{
+
+}
+
+### delete gender
+DELETE http://localhost:3000/gender/4
