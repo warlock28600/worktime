@@ -28,9 +28,7 @@ export class PersonService {
         if(!person){
             throw new NotFoundException('person with given id was not found')
         }
-        console.log(attr);
         Object.assign(person,attr)
-        console.log(person);
         return  this.repo.save(person)
     }
 
