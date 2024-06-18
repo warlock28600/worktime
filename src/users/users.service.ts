@@ -38,7 +38,7 @@ export class UsersService {
       throw new NotFoundException('the user with given id was not found');
     }
     Object.assign(user, userBody);
-    this.repo.save(user);
+    return this.repo.save(user);
   }
 
   onDeleteUser(id: number) {
