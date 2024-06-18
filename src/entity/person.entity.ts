@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 import { GenderEntity } from './gender.entity';
+import { UsersEntity } from './users.entity';
 
 @Entity()
 export class PersonEntity{
@@ -38,5 +38,9 @@ export class PersonEntity{
     @ManyToOne(()=>GenderEntity)
     @JoinColumn({name:'genderId'})
     gender:GenderEntity
+
+    @OneToOne(() => UsersEntity, user => user.person)
+    user: UsersEntity;
+
 
 }
