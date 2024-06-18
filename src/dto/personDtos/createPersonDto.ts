@@ -1,5 +1,4 @@
-import { IsEmail, IsNumber, IsPositive, IsString, Max, Min } from 'class-validator';
-import { Column } from 'typeorm';
+import {IsEmail, IsNumber, IsPositive, IsString, Max, Min} from 'class-validator';
 
 
 export  class CreatePersonDto {
@@ -38,4 +37,5 @@ export  class CreatePersonDto {
   @IsNumber()
   @IsPositive()
   genderId:number
+
 }
