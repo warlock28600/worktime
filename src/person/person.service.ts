@@ -1,9 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
-import { PersonEntity } from '../entity/person.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { CreatePersonDto } from '../dto/personDtos/createPersonDto';
-import { arrify } from 'ts-loader/dist/utils';
+import {Injectable, NotFoundException} from '@nestjs/common';
+import {Repository} from 'typeorm';
+import {PersonEntity} from '../entity/person.entity';
+import {InjectRepository} from '@nestjs/typeorm';
+import {CreatePersonDto} from '../dto/personDtos/createPersonDto';
 
 @Injectable()
 export class PersonService {
@@ -11,11 +10,11 @@ export class PersonService {
   }
 
   onGetPersons() {
-    return this.repo.find();
+    return this.repo.find({relations: ['gender']});
   }
 
   onGetPersonWithId(id: number) {
-    return this.repo.findOneBy({ id: id });
+    return this.repo.findOne({where: {id: id}, relations: ['gender']});
   }
 
   onCreatePerson(personDto: CreatePersonDto) {

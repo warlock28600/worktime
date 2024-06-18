@@ -1,8 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
-import { UsersEntity } from '../entity/users.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { CreateUserDto } from '../dto/user/create-user.dto';
+import {Injectable, NotFoundException} from '@nestjs/common';
+import {Repository} from 'typeorm';
+import {UsersEntity} from '../entity/users.entity';
+import {InjectRepository} from '@nestjs/typeorm';
+import {CreateUserDto} from '../dto/user/create-user.dto';
 import * as bcrypt from 'bcrypt';
 
 
@@ -13,7 +13,7 @@ export class UsersService {
 
   }
 
-  onGEtAllUser() {
+  onGetAllUser() {
     return this.repo.find({ relations: ['person'] });
   }
 
@@ -41,7 +41,12 @@ export class UsersService {
     return this.repo.save(user);
   }
 
-  onDeleteUser(id: number) {
+  async onDeleteUser(id: number) {
+    const user = await this.onGetUserWithId(id)
+    if (!user) {
+      throw new NotFoundException('the user with given id was not found')
+    }
 
+    return this.repo.remove(user)
   }
 }

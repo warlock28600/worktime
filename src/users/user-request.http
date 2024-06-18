@@ -1,0 +1,16 @@
+### get All User
+GET http://localhost:3000/user
+
+
+### get User With Given Id
+GET http://localhost:3000/user/1
+
+### create User
+POST http://localhost:3000/user/register
+Content-Type: application/json
+
+{
+  "expireDate": 1735504200,
+  "passWord": "F.ei28600",
+  "personId": ""
+}
