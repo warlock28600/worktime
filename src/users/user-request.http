@@ -1,16 +1,30 @@
 ### get All User
-GET http://localhost:3000/user
+GET http://localhost:3000/users
 
 
 ### get User With Given Id
-GET http://localhost:3000/user/1
+GET http://localhost:3000/users/2
 
 ### create User
-POST http://localhost:3000/user/register
+POST http://localhost:3000/users/register
 Content-Type: application/json
 
 {
   "expireDate": 1735504200,
   "passWord": "F.ei28600",
-  "personId": ""
+  "person": 2
 }
+
+### update user
+PUT http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "expireDate": 1735504200,
+  "passWord": "F.ei28600"
+}
+
+###Delete User
+DELETE http://localhost:3000/users/3
+
+

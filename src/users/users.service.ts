@@ -1,8 +1,8 @@
-import {Injectable, NotFoundException} from '@nestjs/common';
-import {Repository} from 'typeorm';
-import {UsersEntity} from '../entity/users.entity';
-import {InjectRepository} from '@nestjs/typeorm';
-import {CreateUserDto} from '../dto/user/create-user.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Repository } from 'typeorm';
+import { UsersEntity } from '../entity/users.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { CreateUserDto } from '../dto/user/create-user.dto';
 import * as bcrypt from 'bcrypt';
 
 
@@ -26,7 +26,7 @@ export class UsersService {
   }
 
   async onCreateUser(userBody: CreateUserDto) {
-    userBody.passWord = await bcrypt.hash(userBody.passWord, '12');
+    userBody.passWord = await bcrypt.hash(userBody.passWord, 12);
     const user = this.repo.create(userBody);
     return this.repo.save(user);
   }
