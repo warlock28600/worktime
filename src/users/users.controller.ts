@@ -1,13 +1,20 @@
-import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
-import {UsersService} from "./users.service";
-import {CreateUserDto} from "../dto/user/create-user.dto";
-import {UsersEntity} from "../entity/users.entity";
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { UsersService } from './users.service';
+import { CreateUserDto } from '../dto/user/create-user.dto';
+import { UsersEntity } from '../entity/users.entity';
+import { SignInDto } from '../dto/user/sign-in.dto';
 
 @Controller('users')
 export class UsersController {
 
     constructor(private userService: UsersService) {
     }
+
+    @Post('signIn')
+    onAuthentication(@Body() signInBody: SignInDto) {
+        return this.userService.onSignInWithUserNameAndPassword(signInBody);
+    }
+
 
     @Get()
     onGetAllUsers() {
