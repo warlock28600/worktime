@@ -8,14 +8,16 @@ import { GenderEntity } from './entity/gender.entity';
 import { GenderModule } from './gender/gender.module';
 import { UsersModule } from './users/users.module';
 import { UsersEntity } from './entity/users.entity';
+import { UnitsModule } from './units/units.module';
+import { UnitEntity } from './entity/unit.entity';
 
 @Module({
   imports: [PersonModule,TypeOrmModule.forRoot({
     type:'sqlite',
     database:'workTime.sqlite',
-    entities: [PersonEntity, GenderEntity, UsersEntity],
+    entities: [PersonEntity, GenderEntity, UsersEntity, UnitEntity],
     synchronize:true
-  }), GenderModule, UsersModule],
+  }), GenderModule, UsersModule, UnitsModule],
   controllers: [AppController],
   providers: [AppService],
 })

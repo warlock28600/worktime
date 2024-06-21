@@ -1,6 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { GenderEntity } from './gender.entity';
 import { UsersEntity } from './users.entity';
+import { UnitEntity } from './unit.entity';
 
 @Entity()
 export class PersonEntity{
@@ -41,6 +42,9 @@ export class PersonEntity{
 
     @OneToOne(() => UsersEntity, user => user.person)
     user: UsersEntity;
+
+    @OneToOne(() => UnitEntity, unit => unit.manager)
+    unit: UnitEntity;
 
 
 }
