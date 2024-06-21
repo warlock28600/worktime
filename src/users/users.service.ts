@@ -1,12 +1,12 @@
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import { Repository } from 'typeorm';
-import { UsersEntity } from '../entity/users.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { CreateUserDto } from '../dto/user/create-user.dto';
+import {Injectable, NotFoundException, UnauthorizedException} from '@nestjs/common';
+import {Repository} from 'typeorm';
+import {UsersEntity} from '../entity/users.entity';
+import {InjectRepository} from '@nestjs/typeorm';
+import {CreateUserDto} from '../dto/user/create-user.dto';
 import * as bcrypt from 'bcrypt';
-import { SignInDto } from '../dto/user/sign-in.dto';
-import { PersonService } from '../person/person.service';
-import { JwtService } from '@nestjs/jwt';
+import {SignInDto} from '../dto/user/sign-in.dto';
+import {PersonService} from '../person/person.service';
+import {JwtService} from '@nestjs/jwt';
 
 
 @Injectable()
@@ -21,11 +21,11 @@ export class UsersService {
   }
 
   onGetAllUser() {
-    return this.repo.find({ relations: ['person'] });
+    return this.repo.find({relations: ['person', 'person.gender']});
   }
 
   async onGetUserWithId(id: number) {
-    const user = await this.repo.findOne({ where: { id: id }, relations: ['person'] });
+    const user = await this.repo.findOne({where: {id: id}, relations: ['person', 'person.gender']});
     if (!user) {
       throw new NotFoundException('the user with given id was not found');
     }
@@ -59,7 +59,6 @@ export class UsersService {
 
 
   async onSignInWithUserNameAndPassword(signInBody: SignInDto) {
-    console.log(signInBody);
     const person = await this.personService.onGetPersonForAuth(signInBody.email);
     const user = await this.repo.findOne({ where: { person: person } });
     if (!bcrypt.compareSync(signInBody.password, user.passWord)) {
@@ -71,7 +70,6 @@ export class UsersService {
       personId: person.id,
       email: person.email,
     };
-
     return {
       access_token: await this.jwtService.signAsync(payload),
     };
