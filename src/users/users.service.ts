@@ -21,11 +21,11 @@ export class UsersService {
   }
 
   onGetAllUser() {
-    return this.repo.find({ relations: ['person'] });
+    return this.repo.find({relations: ['person', 'person.gender']});
   }
 
   async onGetUserWithId(id: number) {
-    const user = await this.repo.findOne({ where: { id: id }, relations: ['person'] });
+    const user = await this.repo.findOne({where: {id: id}, relations: ['person', 'person.gender']});
     if (!user) {
       throw new NotFoundException('the user with given id was not found');
     }
