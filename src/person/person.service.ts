@@ -1,8 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
-import { PersonEntity } from '../entity/person.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { CreatePersonDto } from '../dto/personDtos/createPersonDto';
+import {Injectable, NotFoundException} from '@nestjs/common';
+import {Repository} from 'typeorm';
+import {PersonEntity} from '../entity/person.entity';
+import {InjectRepository} from '@nestjs/typeorm';
+import {CreatePersonDto} from '../dto/personDtos/createPersonDto';
 
 @Injectable()
 export class PersonService {
@@ -28,8 +28,10 @@ export class PersonService {
     return this.repo.save(person);
   }
 
-  async onUpdatePerson(id: number, attr: Partial<PersonEntity>) {
-    const person = await this.repo.findOneBy({ id: id });
+  async onUpdatePerson(id: number, attr: Partial<CreatePersonDto>) {
+    const person = await this.onGetPersonWithId(id);
+    console.log(person)
+    console.log(attr)
     if (!person) {
       throw new NotFoundException('person with given id was not found');
     }

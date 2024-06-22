@@ -1,7 +1,7 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { GenderEntity } from './gender.entity';
-import { UsersEntity } from './users.entity';
-import { UnitEntity } from './unit.entity';
+import {Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn} from 'typeorm';
+import {GenderEntity} from './gender.entity';
+import {UsersEntity} from './users.entity';
+import {UnitEntity} from './unit.entity';
 
 @Entity()
 export class PersonEntity{
@@ -36,14 +36,14 @@ export class PersonEntity{
     @Column({default:false})
     Approved:boolean
 
-    @ManyToOne(()=>GenderEntity)
+    @ManyToOne(() => GenderEntity, gender => gender.persons)
     @JoinColumn({name:'genderId'})
     gender:GenderEntity
 
     @OneToOne(() => UsersEntity, user => user.person)
     user: UsersEntity;
 
-    @OneToOne(() => UnitEntity, unit => unit.manager)
+    @OneToOne(() => UnitEntity, unit => unit.person)
     unit: UnitEntity;
 
 

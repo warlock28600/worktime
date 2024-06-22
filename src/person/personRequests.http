@@ -2,7 +2,7 @@
 GET http://localhost:3000/person
 
 ### get Person With Id
-GET http://localhost:3000/person/2
+GET http://localhost:3000/person/3
 
 
 ### create person
@@ -10,23 +10,23 @@ POST http://localhost:3000/person
 Content-Type: application/json
 
 {
-  "firstName": "farhang",
-  "lastName": "ezziirani",
+  "firstName": "فرهنگ",
+  "lastName": "عزی ایرانی",
   "email": "farhang.ezziirani@gmail.com",
   "nationalCode": "0079131001",
-  "address": "tehran",
+  "address": "تهران شهرک ژاندارمری",
   "mobile": "09126034368",
-  "idno": "2860",
-  "fatherName": "abbas",
+  "idno": "2865",
+  "fatherName": "عباس",
   "gender": 1
 }
 
 ### update person
-PUT http://localhost:3000/person/2
+PUT http://localhost:3000/person/3
 Content-Type: application/json
 
 {
-  "firstName": "nahid"
+  "gender": 2
 }
 
 ###delete person

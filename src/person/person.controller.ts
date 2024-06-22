@@ -1,7 +1,6 @@
 import {Body, Controller, Delete, Get, NotFoundException, Param, Post, Put} from '@nestjs/common';
 import {PersonService} from "./person.service";
 import {CreatePersonDto} from '../dto/personDtos/createPersonDto';
-import {PersonEntity} from '../entity/person.entity';
 import {ApiBody, ApiOperation, ApiParam, ApiTags} from "@nestjs/swagger";
 
 @ApiTags('Person')
@@ -37,7 +36,7 @@ export class PersonController {
     @Put('/:id')
     @ApiParam({name: 'id', required: true})
     @ApiBody({type: CreatePersonDto})
-    updatePerson(@Param('id') id:number,@Body() body : Partial<PersonEntity>){
+    updatePerson(@Param('id') id: number, @Body() body: Partial<CreatePersonDto>) {
         return  this.personService.onUpdatePerson(id,body)
     }
 
