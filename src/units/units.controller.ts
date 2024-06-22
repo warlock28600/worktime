@@ -15,9 +15,13 @@ export class UnitsController {
     @ApiOperation({summary: 'Getting All Units'})
     @ApiQuery({name: 'extra', required: false})
     onGetAllUnits(@Query('extra') planeExtra: string) {
-        const extra = planeExtra.split(',')
+        if (planeExtra) {
+            const extra = planeExtra.split(',')
+            return this.unitService.onGetAllUnits(extra)
+        } else {
+            return this.unitService.onGetAllUnits()
+        }
 
-        return this.unitService.onGetAllUnits(extra)
     }
 
     @Get('/:UnitId')
