@@ -2,6 +2,7 @@ import {Body, Controller, Delete, Get, NotFoundException, Param, Post, Put} from
 import {PersonService} from "./person.service";
 import {CreatePersonDto} from '../dto/personDtos/createPersonDto';
 import {ApiBody, ApiOperation, ApiParam, ApiTags} from "@nestjs/swagger";
+import { PersonApproveDto } from 'src/dto/personDtos/person-approve.dto';
 
 @ApiTags('Person')
 @Controller('person')
@@ -44,5 +45,13 @@ export class PersonController {
     @ApiParam({name: 'id', required: true})
     onDeletePerson(@Param('id') id:number){
         return this.personService.onDeletePerson(id)
+    }
+
+    @Put('/:personId')
+    @ApiOperation({summary:'Approved Person'})
+    @ApiParam({name:'personId' , required:true})
+    @ApiBody({type:PersonApproveDto})
+    onApprovedPerson(@Param('personId') personId:number ,@Body() body :PersonApproveDto){
+        return this.personService.onApprovePerson(personId,body)
     }
 }

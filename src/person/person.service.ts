@@ -1,8 +1,8 @@
-import {Injectable, NotFoundException} from '@nestjs/common';
-import {Repository} from 'typeorm';
-import {PersonEntity} from '../entity/person.entity';
-import {InjectRepository} from '@nestjs/typeorm';
-import {CreatePersonDto} from '../dto/personDtos/createPersonDto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Repository } from 'typeorm';
+import { PersonEntity } from '../entity/person.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { CreatePersonDto } from '../dto/personDtos/createPersonDto';
 
 @Injectable()
 export class PersonService {
@@ -10,11 +10,14 @@ export class PersonService {
   }
 
   onGetPersons() {
-    return this.repo.find({relations: ['gender']});
+    return this.repo.find({ relations: ['gender'] });
   }
 
   onGetPersonWithId(id: number) {
-    return this.repo.findOne({where: {id: id}, relations: ['gender']});
+    return this.repo.findOne({
+      where: { id: id },
+      relations: ['gender'],
+    });
   }
 
   onGetPersonForAuth(email: string) {
@@ -30,8 +33,8 @@ export class PersonService {
 
   async onUpdatePerson(id: number, attr: Partial<CreatePersonDto>) {
     const person = await this.onGetPersonWithId(id);
-    console.log(person)
-    console.log(attr)
+    console.log(person);
+    console.log(attr);
     if (!person) {
       throw new NotFoundException('person with given id was not found');
     }
@@ -45,5 +48,14 @@ export class PersonService {
       throw new NotFoundException('person with given id was not found');
     }
     return this.repo.remove(person);
+  }
+
+  async onApprovePerson(personId: number, personBody: Partial<PersonEntity>) {
+    const person = await this.onGetPersonWithId(personId);
+    if (!person) {
+      throw new NotFoundException('person with given id was not found');
+    }
+    Object.assign(person, personBody);
+    return this.repo.save(person);
   }
 }

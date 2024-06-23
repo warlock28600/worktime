@@ -15,14 +15,16 @@ export class UnitsService {
     return this.repo.find({relations: extra ?? []});
   }
 
-  onGetUnitWithId(unitId: number) {
-    const unit = this.repo.findOne({ where: { id: unitId }, relations: ['person'] });
+  onGetUnitWithId(unitId: number ,extra?:string[]) {
+    const unit = this.repo.findOne({ where: { id: unitId }, relations: extra ?? [] });
+    if(!unit){
+      throw new NotFoundException('the unit with given id not fount')
+    }
+    return unit
   }
 
   onCreateUnit(unitBody: CreateUnitDto) {
-    console.log(unitBody)
     const unit = this.repo.create(unitBody);
-    console.log(unit)
     return this.repo.save(unit);
   }
 
