@@ -2,6 +2,7 @@ import {Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn}
 import {GenderEntity} from './gender.entity';
 import {UsersEntity} from './users.entity';
 import {UnitEntity} from './unit.entity';
+import {PersonInUnitEntity} from "./person-in-unit.entity";
 
 @Entity()
 export class PersonEntity{
@@ -45,6 +46,9 @@ export class PersonEntity{
 
     @OneToOne(() => UnitEntity, unit => unit.person)
     unit: UnitEntity;
+
+    @OneToOne(() => PersonInUnitEntity, personInUnit => personInUnit.person)
+    personInUnit: PersonInUnitEntity
 
 
 }

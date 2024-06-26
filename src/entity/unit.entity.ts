@@ -1,5 +1,6 @@
-import {Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn} from 'typeorm';
+import {Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn} from 'typeorm';
 import {PersonEntity} from './person.entity';
+import {PersonInUnitEntity} from "./person-in-unit.entity";
 
 @Entity()
 export class UnitEntity {
@@ -15,4 +16,7 @@ export class UnitEntity {
 
   @Column()
   managerId: number
+
+  @OneToMany(() => PersonInUnitEntity, personInUnit => personInUnit.unit)
+  personInUnit: PersonInUnitEntity
 }
