@@ -18,7 +18,7 @@ Content-Type: application/json
   "mobile": "09126034368",
   "idno": "2865",
   "fatherName": "عباس",
-  "gender": 1
+  "gender": 2
 }
 
 ### update person
