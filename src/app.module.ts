@@ -11,6 +11,7 @@ import { UsersEntity } from './entity/users.entity';
 import { UnitsModule } from './units/units.module';
 import { UnitEntity } from './entity/unit.entity';
 import { PersonInUnitEntity } from './entity/person-in-unit.entity';
+import { PersonInUnitModule } from './person-in-unit/person-in-unit.module';
 
 @Module({
   imports: [PersonModule,TypeOrmModule.forRoot({
@@ -27,7 +28,7 @@ import { PersonInUnitEntity } from './entity/person-in-unit.entity';
     // database:'workTime.sqlite',
     // entities: [PersonEntity, GenderEntity, UsersEntity, UnitEntity,PersonInUnitEntity],
     // synchronize:true
-  }), GenderModule, UsersModule, UnitsModule],
+  }), GenderModule, UsersModule, UnitsModule, PersonInUnitModule],
   controllers: [AppController],
   providers: [AppService],
 })
