@@ -1,0 +1,2 @@
+### get all person  in units
+GET http://localhost:3000/personInUnit

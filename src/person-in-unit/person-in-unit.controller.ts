@@ -3,7 +3,7 @@ import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { PersonInUnitService } from './person-in-unit.service';
 import { PeronInUnitCreateDto } from '../dto/person-in-unit/peron-in-unit-create.dto';
 
-@Controller('person-in-unit')
+@Controller('personInUnit')
 @ApiTags('PersonInUnit')
 export class PersonInUnitController {
 
