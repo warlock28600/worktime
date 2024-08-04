@@ -10,13 +10,14 @@ export class PersonInUnitService {
   constructor(@InjectRepository(PersonInUnitEntity) private repo: Repository<PersonInUnitEntity>) {
   }
 
-  onGetAllPersonInUnit() {
-    return this.repo.find();
+  onGetAllPersonInUnit(extra?: string[]) {
+    return this.repo.find({ relations: extra ?? [] });
   }
 
-  onGetPersonInUnitWithId(PersonInUnitId: number) {
+  onGetPersonInUnitWithId(PersonInUnitId: number, extra?: string[]) {
     let person = this.repo.findOne({
       where: { id: PersonInUnitId },
+      relations: extra ?? [],
     });
     if (!person) {
       throw new NotFoundException('the id you provide dose not exists');
