@@ -40,6 +40,9 @@ export class PersonEntity{
     @ManyToOne(() => GenderEntity, gender => gender.persons)
     @JoinColumn({name:'genderId'})
     gender:GenderEntity
+    
+    @Column()
+    genderId:Number
 
     @OneToOne(() => UsersEntity, user => user.person)
     user: UsersEntity;

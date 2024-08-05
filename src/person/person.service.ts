@@ -9,8 +9,8 @@ export class PersonService {
   constructor(@InjectRepository(PersonEntity) private repo: Repository<PersonEntity>) {
   }
 
-  onGetPersons() {
-    return this.repo.find({ relations: ['gender'] });
+  onGetPersons(extra:string[]) {
+    return this.repo.find({ relations: extra ?? [] });
   }
 
   onGetPersonWithId(id: number) {

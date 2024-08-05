@@ -36,5 +36,5 @@ export class GetAllDataDto {
 
     @IsNumber()
     @IsPositive()
-    gender: number
+    genderId: number
 }

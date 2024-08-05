@@ -1,8 +1,9 @@
-import {Body, Controller, Delete, Get, NotFoundException, Param, Post, Put} from '@nestjs/common';
+import {Body, Controller, Delete, Get, NotFoundException, Param, Post, Put, Query} from '@nestjs/common';
 import {PersonService} from "./person.service";
 import {CreatePersonDto} from '../dto/personDtos/createPersonDto';
-import {ApiBody, ApiOperation, ApiParam, ApiTags} from "@nestjs/swagger";
+import {ApiBody, ApiOperation, ApiParam, ApiQuery, ApiTags} from "@nestjs/swagger";
 import { PersonApproveDto } from 'src/dto/personDtos/person-approve.dto';
+import { ReformatData } from 'src/enum/reformatData';
 
 @ApiTags('Person')
 @Controller('person')
@@ -13,8 +14,13 @@ export class PersonController {
 
     @Get()
     @ApiOperation({summary: 'Get All Persons'})
-    getAllPerson() {
-        return this.personService.onGetPersons()
+    @ApiQuery({
+        name:'extra',
+        required:false
+    })
+    getAllPerson(@Query('extra') planeExtra:string) {
+        const extra=ReformatData.onReformatExtra(planeExtra)
+        return this.personService.onGetPersons(extra)
     }
 
     @Get('/:id')
