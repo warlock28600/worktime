@@ -18,7 +18,7 @@ export class PersonController {
         name:'extra',
         required:false
     })
-    getAllPerson(@Query('extra') planeExtra:string) {
+    getAllPerson(@Query('extra') planeExtra?:string) {
         const extra=ReformatData.onReformatExtra(planeExtra)
         return this.personService.onGetPersons(extra)
     }
@@ -26,8 +26,13 @@ export class PersonController {
     @Get('/:id')
     @ApiParam({name: 'id', required: true})
     @ApiOperation({summary: 'Getting Person With Id'})
-    async getPersonWithId(@Param('id') id: number) {
-        const person = await this.personService.onGetPersonWithId(id)
+    @ApiQuery({
+        name:'extra',
+        required:false
+    })
+    async getPersonWithId(@Param('id') id: number,@Query('extra') planeExtra?:string) {
+        const extra=ReformatData.onReformatExtra(planeExtra)
+        const person = await this.personService.onGetPersonWithId(id,extra)
         if(!person){
             throw new NotFoundException('person with given id not found')
         }

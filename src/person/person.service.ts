@@ -13,10 +13,10 @@ export class PersonService {
     return this.repo.find({ relations: extra ?? [] });
   }
 
-  onGetPersonWithId(id: number) {
+  onGetPersonWithId(id: number ,extra?:string[]) {
     return this.repo.findOne({
       where: { id: id },
-      relations: ['gender'],
+      relations: extra ?? [],
     });
   }
 
@@ -33,8 +33,6 @@ export class PersonService {
 
   async onUpdatePerson(id: number, attr: Partial<CreatePersonDto>) {
     const person = await this.onGetPersonWithId(id);
-    console.log(person);
-    console.log(attr);
     if (!person) {
       throw new NotFoundException('person with given id was not found');
     }
