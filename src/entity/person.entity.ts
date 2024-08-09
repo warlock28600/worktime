@@ -1,8 +1,9 @@
-import {Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn} from 'typeorm';
-import {GenderEntity} from './gender.entity';
-import {UsersEntity} from './users.entity';
-import {UnitEntity} from './unit.entity';
-import {PersonInUnitEntity} from "./person-in-unit.entity";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { GenderEntity } from './gender.entity';
+import { UsersEntity } from './users.entity';
+import { UnitEntity } from './unit.entity';
+import { PersonInUnitEntity } from './person-in-unit.entity';
+import { AttendanceEntity } from './attendance.entity';
 
 @Entity()
 export class PersonEntity{
@@ -52,6 +53,9 @@ export class PersonEntity{
 
     @OneToOne(() => PersonInUnitEntity, personInUnit => personInUnit.person)
     personInUnit: PersonInUnitEntity
+
+    @OneToMany(() => AttendanceEntity, attendance => attendance.person)
+    attendance: AttendanceEntity;
 
 
 }

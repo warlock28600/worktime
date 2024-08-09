@@ -12,6 +12,8 @@ import { UnitsModule } from './units/units.module';
 import { UnitEntity } from './entity/unit.entity';
 import { PersonInUnitEntity } from './entity/person-in-unit.entity';
 import { PersonInUnitModule } from './person-in-unit/person-in-unit.module';
+import { AttendanceModule } from './attendance/attendance.module';
+import { AttendanceEntity } from './entity/attendance.entity';
 
 @Module({
   imports: [PersonModule,TypeOrmModule.forRoot({
@@ -23,12 +25,12 @@ import { PersonInUnitModule } from './person-in-unit/person-in-unit.module';
     database: 'WorkTime',
     synchronize: true,
     logging: true,
-    entities: [PersonEntity, GenderEntity, UsersEntity, UnitEntity, PersonInUnitEntity],
+    entities: [PersonEntity, GenderEntity, UsersEntity, UnitEntity, PersonInUnitEntity, AttendanceEntity],
     // type:'sqlite',
     // database:'workTime.sqlite',
     // entities: [PersonEntity, GenderEntity, UsersEntity, UnitEntity,PersonInUnitEntity],
     // synchronize:true
-  }), GenderModule, UsersModule, UnitsModule, PersonInUnitModule],
+  }), GenderModule, UsersModule, UnitsModule, PersonInUnitModule, AttendanceModule],
   controllers: [AppController],
   providers: [AppService],
 })
