@@ -1,8 +1,8 @@
-import {Injectable, NotFoundException} from '@nestjs/common';
-import {Repository} from 'typeorm';
-import {UnitEntity} from '../entity/unit.entity';
-import {InjectRepository} from '@nestjs/typeorm';
-import {CreateUnitDto} from '../dto/unit/create-unit.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Repository } from 'typeorm';
+import { UnitEntity } from '../entity/unit.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { CreateUnitDto } from '../dto/unit/create-unit.dto';
 
 @Injectable()
 export class UnitsService {
@@ -12,7 +12,9 @@ export class UnitsService {
 
 
   onGetAllUnits(extra?: any) {
+    console.log(extra);
     return this.repo.find({relations: extra ?? []});
+
   }
 
   onGetUnitWithId(unitId: number ,extra?:string[]) {
